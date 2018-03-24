@@ -1,0 +1,38 @@
+welcome: |
+  Zurzeit kann ich folgende Dinge für dich tun:
+  - Ich kann dir einen generellen Überblick über den gesamten Cryptomarkt geben,
+  dazu zählen beispielsweise die Bitcoin Marktdominanz und die Top 3 Coins nach 
+  Marktkapitalisierung.
+
+  Was möchtest du tun?
+
+market_update: |
+  Die Marktdominanz von Bitcoin beträgt {{ global_info['btc_dom'] }} Prozent 
+  bei einer Marktkapitalisierung des gesamten Krypto-Markts von 
+  {{ global_info['mkt_cap'] | humanize_big_number }} Euro. 
+  Die Top 3 Coins nach Marktkapitalisierung lauten aktuell 
+  {{coins[0]['name']}}, {{coins[1]['name']}} und {{coins[2]['name']}}.
+  Der Preis von {{coins[0]['name']}} liegt bei 
+  {{ coins[0]['price_eur'] | humanize_price }}, das ist ein
+  {{ coins[0]['percent_change_24h'] | humanize_percent }} zu gestern.
+  {{coins[1]['name']}} liegt bei 
+  {{ coins[1]['price_eur'] | humanize_price }}, das ist ein
+  {{ coins[1]['percent_change_24h'] | humanize_percent }} in den letzten 24
+  Stunden.
+  {{coins[2]['name']}} kostet nach einem
+  {{ coins[2]['percent_change_24h'] | humanize_percent }} über die letzten 24
+  Stunden aktuell {{ coins[2]['price_eur'] | humanize_price }}.
+  Kann ich dir sonst noch irgendwie weiterhelfen? Du könntest mich zum Beispiel
+  nach aktuellen oder historischen Preisen einzelner Coins fragen.
+
+help: |
+  Ich hab dich nicht verstanden. Möchtest du, dass ich dir noch weiterhelfe?
+  Wenn ja, könnte ich dir zum Beispiel mit aktuellen und historischen Preisen
+  einzelner Coins helfen.
+
+
+get_price: |
+  Der aktuelle Preis von {{info.coin}} beträgt {{info.price_eur}} Euro, 
+  das ist {{info.percent_change_24h}} als gestern.
+
+    
