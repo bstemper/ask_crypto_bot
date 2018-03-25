@@ -119,9 +119,7 @@ def get_price(coin):
         return question('''Ich hab die Coin nicht verstanden. Kannst du bitte
                            nochmal alles wiederholen.''')
 
-    coin = coin.lower()
-
-    api = cmc_url_api + 'ticker/{}/?convert=EUR'.format(coin)
+    api = cmc_url_api + 'ticker/{}/?convert=EUR'.format(coin.lower())
     json = requests.get(api).json()[0]
 
     speech_output = render_template('get_price', coin=coin, json=json)
