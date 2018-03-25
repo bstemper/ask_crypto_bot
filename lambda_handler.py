@@ -1,11 +1,11 @@
 import logging
 import requests
 from flask import Flask, render_template
-from flask_ask import Ask, request, session, question, statement
+from flask_ask import Ask, request, session, question, statement, convert_errors
 
 app = Flask(__name__)
 ask = Ask(app, "/")
-logger = logging.getLogger('flask_ask').setLevel(logging.DEBUG)
+# logger = logging.getLogger('flask_ask').setLevel(logging.DEBUG)
 
 # APIs
 cmc_url_api = 'https://api.coinmarketcap.com/v1/'
@@ -110,5 +110,35 @@ def get_market_update():
     return question(speech_output).reprompt(help_text).simple_card('Crypto Markt Update', 
                                                 speech_output)
 
+
+@ask.intent('get_price')
+def get_price(coin):
+
+    if convert_errors:
+
+        return question('''Ich hab die Coin nicht verstanden. Kannst du bitte
+                           nochmal alles wiederholen.''')
+
+    coin = coin.lower()
+
+    api = cmc_url_api + 'ticker/{}/?convert=EUR'.format(coin)
+    json = requests.get(api).json()[0]
+
+    speech_output = render_template('get_price', coin=coin, json=json)
+
+    return statement(speech_output).simple_card('Marktpreis %s' % coin, speech_output)
+
+
+    
+
+
+
+
+
+
+
+'https://api.coinmarketcap.com/v1/ticker/?convert=EUR&limit=3'
+ccp = 'price?fsym=ETH&tsyms=BTC,USD,EUR'
+ccp2 = 'https://min-api.cryptocompare.com/data/pricehistorical?fsym=ETH&tsyms=BTC,USD,EUR&ts=1452680400&extraParams=your_app_name'
 
 app.run(debug=True)

@@ -1,6 +1,6 @@
 welcome: |
   Zurzeit kann ich folgende Dinge für dich tun:
-  - Ich kann dir einen generellen Überblick über den gesamten Cryptomarkt geben,
+  - Ich kann dir einen generellen Überblick über den gesamten Kryptomarkt geben,
   dazu zählen beispielsweise die Bitcoin Marktdominanz und die Top 3 Coins nach 
   Marktkapitalisierung.
 
@@ -30,9 +30,10 @@ help: |
   Wenn ja, könnte ich dir zum Beispiel mit aktuellen und historischen Preisen
   einzelner Coins helfen.
 
-
 get_price: |
-  Der aktuelle Preis von {{info.coin}} beträgt {{info.price_eur}} Euro, 
-  das ist {{info.percent_change_24h}} als gestern.
+  Der aktuelle Marktpreis von {{ coin }} beträgt
+  {{ json['price_eur'] | humanize_price }}, das ist ein 
+  {{ json['percent_change_24h'] | humanize_percent }} gegenüber gestern.
+
 
     
