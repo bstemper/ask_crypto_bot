@@ -51,7 +51,7 @@ def humanize_percent(percent):
 
     percent = float(percent)
 
-    preposition = 'plus von ' if percent > 0 else 'minus von '
+    preposition = 'Plus von ' if percent > 0 else 'Minus von '
 
     percent = abs(percent)
 
