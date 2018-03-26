@@ -8,7 +8,7 @@ ask = Ask(app, "/")
 # logger = logging.getLogger('flask_ask').setLevel(logging.DEBUG)
 
 # APIs
-cmc_url_api = 'https://api.coinmarketcap.com/v1/'
+cmc_base_url_api = 'https://api.coinmarketcap.com/v1/'
 ccp_url_api = 'https://min-api.cryptocompare.com/data/'
 
 # ---------------------- Helper functions ------------------------------------ #
@@ -86,22 +86,30 @@ def launch():
 @ask.intent('get_market_update')
 def get_market_update():
 
-    api = cmc_url_api + 'global/?convert=EUR'
-    r = requests.get(api).json()
+    api1 = cmc_base_url_api + 'global/?convert=EUR'
+    api2 = cmc_base_url_api + 'ticker/?convert=EUR&limit=3'
 
+    try:
+        
+        # Retrieving global info
+        r = requests.get(api1).json()
+
+        # Retrieving top 3 coins
+        coins = requests.get(api2).json()
+
+    except:
+
+        return statement(api_error).simple_card('Fehler bei Datenquelle', api_error)
+
+    # Collecting important global info
     global_info = {}
 
-    # Marketcap
     global_info['mkt_cap'] = r['total_market_cap_eur']
 
-    # Bitcoin dominance
     btc_dom = r['bitcoin_percentage_of_market_cap']
     global_info['btc_dom'] = replace_decimal_point(btc_dom)
 
-    # Top 3 Coins
-    api = cmc_url_api + 'ticker/?convert=EUR&limit=3'
-    coins = requests.get(api).json()
-
+    # Generate outputs
     speech_output = render_template('market_update', global_info=global_info,
                                     coins=coins)
 
@@ -119,7 +127,7 @@ def get_price(coin):
         return question('''Ich hab die Coin nicht verstanden. Kannst du bitte
                            nochmal alles wiederholen.''')
 
-    api = cmc_url_api + 'ticker/{}/?convert=EUR'.format(coin.lower())
+    api = cmc_base_url_api + 'ticker/{}/?convert=EUR'.format(coin.lower())
     json = requests.get(api).json()[0]
 
     speech_output = render_template('get_price', coin=coin, json=json)

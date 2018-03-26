@@ -35,5 +35,9 @@ get_price: |
   {{ json['price_eur'] | humanize_price }}, das ist ein 
   {{ json['percent_change_24h'] | humanize_percent }} gegenüber gestern.
 
+api_error: |
+  Entschuldigung. Es gab ein Problem mit meiner Datenquelle. Versuche es doch
+  gerne noch einmal oder wenn das Problem besteht, gerne auch später.
+
 
     
