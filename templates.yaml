@@ -1,36 +1,30 @@
 welcome: |
-  Willkommen bei Crypto Kit! Im Moment kann ich folgende Aufgaben für dich
-  erledigen:
+  <speak>
+  Willkommen bei Krypto Kit! 
+  <audio src='https://s3-eu-west-1.amazonaws.com/crypto-kit-ask/heyheyhey.mp3'/>
+  Im Moment kann ich folgende Aufgaben für dich erledigen:
 
-  - Marktüberblick über den gesamten Cryptomarkt.
-  - Aktuelle Preise und Tagesveränderung der Top 20 Crypto Coins. 
+  - Marktüberblick über den gesamten Kryptomarkt.
+  - Aktuelle Preise und Tagesveränderung der Top 20 Krypto Coins. 
  
   Was möchtest du tun?
+  </speak>
 
 market_update: |
-  Die Marktkapitalisierung des gesamten Krypto-Markts beträgt im Moment
-  {{ global_info['mkt_cap'] | humanize_big_number }} Euro. Davon entfallen 
-  {{ global_info['btc_dom'] }} Prozent auf Bitcoin.
+  Die Marktkapitalisierung des gesamten Kryptomarkts beträgt im Moment {{ global_info['mkt_cap'] | humanize_big_number }} Euro. Davon entfallen 
+  {{ global_info['btc_dom'] }} Prozent auf Bitcoin. Die Top 3 Coins nach Marktkapitalisierung lauten aktuell {{coins[0]['name']}}, 
+  {{coins[1]['name']}} und {{coins[2]['name']}}. Nachfolgend nun aktuelle Preise und Tagesveränderungen der Top 3 Coins:
 
-  Die Top 3 Coins nach Marktkapitalisierung lauten aktuell 
-  {{coins[0]['name']}}, {{coins[1]['name']}} und {{coins[2]['name']}}.
+  - {{coins[0]['name']}}: {{ coins[0]['price_eur'] | humanize_price }}, ein {{ coins[0]['percent_change_24h'] | humanize_percent }}.
+  - {{coins[1]['name']}}: {{ coins[1]['price_eur'] | humanize_price }}, ein {{ coins[1]['percent_change_24h'] | humanize_percent }}.
+  - {{coins[2]['name']}}: {{ coins[2]['price_eur'] | humanize_price }}, ein {{ coins[2]['percent_change_24h'] | humanize_percent }}.
 
-  Nachfolgend nun aktuelle Preise und Tagesveränderungen der Top 3 Coins:
-
-  - {{coins[0]['name']}}: {{ coins[0]['price_eur'] | humanize_price }}, ein
-  {{ coins[0]['percent_change_24h'] | humanize_percent }}.
-  - {{coins[1]['name']}}: {{ coins[1]['price_eur'] | humanize_price }}, ein
-  {{ coins[1]['percent_change_24h'] | humanize_percent }}.
-  - {{coins[2]['name']}}: {{ coins[2]['price_eur'] | humanize_price }}, ein 
-  {{ coins[2]['percent_change_24h'] | humanize_percent }}.
-
-  Du kannst mir gerne auch gezieltere Fragen nach dem Preis einzelner Coins
-  stellen. Ansonsten sage: Stop.
+  Du kannst mir gerne auch gezieltere Fragen nach dem Preis einzelner Coins stellen. Ansonsten sage: Stop.
 
 help: |
   Ich hab dich nicht verstanden. Wenn du möchtest, dass ich dir weiterhelfe,
   frag mich doch noch etwas anderes, wie zum Beispiel den Preis eines bestimmten
-  Coins. Ansonsten sage: Stop.
+  Coins. Ansonsten sage: Alexa, Stop.
 
 get_price: |
   Der aktuelle Marktpreis von {{ coin }} beträgt
